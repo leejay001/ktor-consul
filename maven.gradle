@@ -1,0 +1,14 @@
+
+apply from: 'github.gradle'
+
+ext{
+    mavenUrl = 'https://maven.pkg.github.com/leejay001/ktor-consul'
+    mavenSnapShotUrl = 'https://maven.pkg.github.com/leejay001/ktor-consul/snapshots'
+    mavenUser = userName
+    mavenPasswd = accessToken
+
+    moduleGroupId = 'com.lee.consul'
+    moduleArtifactId = 'consul'
+    moduleVersion = '0.0.1'
+    moduleSnapshotVersion = '0.0.1-SNAPSHOT'
+}

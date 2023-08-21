@@ -1,0 +1,57 @@
+apply plugin: 'maven-publish'
+//apply plugin: 'signing'
+
+apply from: 'maven.gradle'
+
+group = moduleGroupId
+version = moduleVersion
+
+publishing {
+    publications {
+        gpr(MavenPublication) {
+            from components.java
+
+            pom.withXml {
+                def projectNode = asNode()
+                projectNode.appendNode('description', 'Ktor plugin for Consul')
+                projectNode.appendNode('url', 'https://github.com/leejay001/ktor-consul')
+//                projectNode.appendNode('artifactId', '')
+
+                def licensesNode = projectNode.appendNode('licenses')
+                def licenseNode = licensesNode.appendNode('license')
+                licenseNode.appendNode('name', 'MIT License')
+                licenseNode.appendNode('url', 'https://opensource.org/licenses/MIT')
+
+                def developersNode = projectNode.appendNode('developers')
+                def developerNode = developersNode.appendNode('developer')
+                developerNode.appendNode('id', 'leejay001')
+                developerNode.appendNode('name', 'consul')
+
+                def scmNode = projectNode.appendNode('scm')
+                scmNode.appendNode('connection', 'scm:git:git://github.com/leejay001/ktor-consul.git')
+                scmNode.appendNode('developerConnection', 'scm:git:ssh://github.com:leejay001/ktor-consul.git')
+                scmNode.appendNode('url', 'https://github.com/leejay001/ktor-consul')
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            name 'ktor-consul'
+            url uri(mavenUrl)
+            credentials {
+                username mavenUser
+                password mavenPasswd
+            }
+        }
+    }
+}
+
+//signing {
+//    signing {
+//        sign publishing.publications['gpr']
+//        signatory {
+//            required { }
+//        }
+//    }
+//}

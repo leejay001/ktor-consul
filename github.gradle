@@ -1,0 +1,17 @@
+def props = new Properties()
+def propertiesFile = project.file('github.properties')
+def user = ""
+def token = ""
+def isSnapshot = false
+
+props.load(propertiesFile.newDataInputStream())
+user = props.getProperty('user')
+token = props.getProperty('token')
+//isSnapshot = props.getProperty('isSnapShot') asBoolean()
+
+ext{
+    userName = user
+    accessToken = token
+    SNAPSHOT = isSnapshot
+}
+

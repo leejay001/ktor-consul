@@ -5,9 +5,10 @@ plugins {
     application
 }
 
+apply(from = "deploy.gradle")
 
-group = "com.lee"
-version = "1.0.0"
+group = "com.lee.consul"
+version = "0.0.1"
 
 repositories {
     mavenCentral()
