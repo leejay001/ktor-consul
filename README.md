@@ -37,14 +37,14 @@ See [Consul.kt](src/main/kotlin/com/lee/consul/plugin/Consul.kt) for more detail
 Add the following dependency in your `build.gradle`:
 
 ```groovy
-implementation 'com.lee:consul:0.0.1'
+implementation 'com.lee.consul:consul:0.0.1'
 ```
 
 Or in your `pom.xml`:
 
 ```xml
 <dependency>
-  <groupId>com.lee</groupId>
+  <groupId>com.lee.consul</groupId>
   <artifactId>consul</artifactId>
   <version>0.0.1</version>
 </dependency>
