@@ -42,7 +42,7 @@ class Config(
     var isHttps = false
     val consulUrl: String get() = if (isHttps) "https://$host:$port" else "http://$host:$port"
 
-    fun withHttps(isHttps: Boolean = false ): Config{
+    fun withHttps(isHttps: Boolean = false): Config {
         this.isHttps = isHttps
         return this
     }
