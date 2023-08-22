@@ -1,3 +1,4 @@
+apply plugin: 'java'
 apply plugin: 'maven-publish'
 
 apply from: 'maven.gradle'
@@ -5,11 +6,16 @@ apply from: 'maven.gradle'
 group = moduleGroupId
 version = moduleVersion
 
+task sourceJar(type: Jar) {
+    from sourceSets.main.allJava
+    classifier 'sources'
+}
+
 publishing {
     publications {
         gpr(MavenPublication) {
             from components.java
-
+            artifact sourceJar
             pom.withXml {
                 def projectNode = asNode()
                 projectNode.appendNode('description', 'Ktor plugin for Consul')

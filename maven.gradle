@@ -9,6 +9,6 @@ ext{
 
     moduleGroupId = 'com.lee.consul'
     moduleArtifactId = 'consul'
-    moduleVersion = '0.0.1'
+    moduleVersion = '0.0.7'
     moduleSnapshotVersion = '0.0.1-SNAPSHOT'
 }

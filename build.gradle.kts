@@ -1,14 +1,14 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.8.22"
+    kotlin("jvm") version "1.8.21"
     application
 }
 
 apply(from = "deploy.gradle")
 
 group = "com.lee.consul"
-version = "0.0.1"
+version = "0.0.6"
 
 repositories {
     mavenCentral()
@@ -26,5 +26,5 @@ tasks.test {
 }
 
 tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions.jvmTarget = JavaVersion.VERSION_11.majorVersion
 }
