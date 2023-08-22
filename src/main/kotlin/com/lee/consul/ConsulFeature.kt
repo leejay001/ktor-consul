@@ -89,9 +89,9 @@ fun consulMicroService(
 
     createConfiguration = { applicationConfig ->
 
-        val name = applicationConfig.tryGetString("$configurationPath.name") ?: "account"
-        val host = applicationConfig.tryGetString("$configurationPath.host") ?: "localhost"
-        val port = applicationConfig.tryGetString("$configurationPath.port")?.toInt() ?: 8500
+        val name = applicationConfig.tryGetString("name") ?: "default"
+        val host = applicationConfig.tryGetString("host") ?: "localhost"
+        val port = applicationConfig.tryGetString("port")?.toInt() ?: 8500
 
         ConsulFeature(
             Config(
