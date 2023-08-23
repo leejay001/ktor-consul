@@ -8,7 +8,7 @@ plugins {
 apply(from = "deploy.gradle")
 
 group = "com.lee.consul"
-version = "0.0.7"
+version = "0.0.8-beta"
 
 repositories {
     mavenCentral()

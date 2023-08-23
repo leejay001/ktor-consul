@@ -1,5 +1,6 @@
 package com.lee.consul
 
+import com.lee.consul.Config.Companion.DEFAULT_CONSUL_URL
 import com.orbitz.consul.Consul
 import com.orbitz.consul.model.agent.ImmutableRegistration
 import io.ktor.server.application.*
@@ -34,13 +35,19 @@ class ConsulFeature(
 class Config(
     var serviceName: String,
     var host: String,
-    var port: Int
+    var port: Int,
+    var consulUrl: String = DEFAULT_CONSUL_URL
 ) {
     private var configConsul: Consul.Builder.() -> Unit = {}
     private var registrationConfig: ImmutableRegistration.Builder.() -> Unit = {}
+    private var configChange: Config.() -> Unit = {}
 
     var isHttps = false
-    val consulUrl: String get() = if (isHttps) "https://$host:$port" else "http://$host:$port"
+
+    fun withConfig(configChange: Config.() -> Unit): Config{
+        this.configChange = configChange
+        return this
+    }
 
     fun withHttps(isHttps: Boolean = false): Config {
         this.isHttps = isHttps
@@ -65,6 +72,11 @@ class Config(
     internal operator fun component5() = consulUrl
     internal operator fun component6() = configConsul
     internal operator fun component7() = registrationConfig
+
+    companion object{
+        const val DEFAULT_CONSUL_URL = "http://localhost:8500"
+    }
+
 }
 
 
@@ -91,13 +103,17 @@ fun consulMicroService(
 
         val name = applicationConfig.tryGetString("name") ?: "default"
         val host = applicationConfig.tryGetString("host") ?: "localhost"
-        val port = applicationConfig.tryGetString("port")?.toInt() ?: 8500
+        val port = applicationConfig.tryGetString("port")?.toInt() ?: 8080
+
+        val consulUrl = applicationConfig.tryGetString("consul_url") ?: DEFAULT_CONSUL_URL
+
 
         ConsulFeature(
             Config(
                 serviceName = name,
                 host = host,
-                port = port
+                port = port,
+                consulUrl = consulUrl
             )
         )
     },
